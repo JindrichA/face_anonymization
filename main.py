@@ -7,11 +7,11 @@ import io
 from contextlib import redirect_stdout
 
 
+# Try this https://bleedai.com/5-easy-effective-face-detection-algorithms-in-python/
 
 
 
-
-folder_path = r'G:\My Drive\FTVS_PhyEx_2023\Mereni_24022023\Originalni_videa'
+folder_path = r'C:\Users\adolfjin\Videos\Originalni'
 output_path = r'C:\Users\adolfjin\Videos\Anonymizovana'
 
 mp4_files = glob.glob(os.path.join(folder_path, "*.mp4"))
@@ -70,13 +70,15 @@ for mp4_file in tqdm(mp4_files):
             try:
                 list_of_not_detected.append(i)
                 frame[y:y + h, x:x + w] = blur
+                out.write(frame)
             except:
                 print("Does not exist for frame no. {}".format(i))
+                out.write(frame)
 
     # Release the video capture and writer objects
     cap.release()
     out.release()
-    print("Not working are: ".format(str(list_of_not_detected)))
+    print("Not working frames are: ".format(str(list_of_not_detected)))
 
     # Destroy all windows
     cv2.destroyAllWindows()
